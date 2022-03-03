@@ -3,6 +3,7 @@ package com.kmslh;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,6 +22,12 @@ public class MainPage {
         driver.get("https://www.kmslh.com/automation-test/");
 //        Thread.sleep(5000);
 
+        Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(
+                By.id("firstname-9de5ebd5-2ab3-48fe-bac8-bfc25cfc5814")))
+                .build()
+                .perform();
+
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(
                 By.id("firstname-9de5ebd5-2ab3-48fe-bac8-bfc25cfc5814")));
         driver.findElement(By.id("firstname-9de5ebd5-2ab3-48fe-bac8-bfc25cfc5814"));
@@ -30,9 +37,9 @@ public class MainPage {
         driver.findElement(By.id("leadinModal-content-wrapper-2379091"));
 
 
-        ((JavascriptExecutor) driver).executeScript(
-                " var elem = document.getElementById('hs-eu-cookie-confirmation');\n" +
-                        "  elem.remove();");
+//        ((JavascriptExecutor) driver).executeScript(
+//                " var elem = document.getElementById('hs-eu-cookie-confirmation');\n" +
+//                        "  elem.remove();");
 //        driver.findElement(By.xpath("//*[@id=\"hs-eu-cookie-confirmation\"]"));
 //        driver.findElement(By.xpath("//*[@id=\"hs-eu-confirmation-button\"]"));
 
