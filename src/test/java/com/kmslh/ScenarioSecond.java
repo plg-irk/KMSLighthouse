@@ -31,7 +31,8 @@ public class ScenarioSecond {
     }
 
     @Test
-    void test() throws InterruptedException {
+    void testSecond() throws InterruptedException {
+
         webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(120));
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(
                 By.id("leadinModal-content-wrapper-2379091")));
@@ -39,10 +40,10 @@ public class ScenarioSecond {
         WebElement element = driver.findElement(By.xpath(
                 "//*[@id=\"leadinModal-content-wrapper-2379091\"]/div/div/span/div/p/a"));
         element.click();
-        Thread.sleep(5000);
 
         List<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
+        Thread.sleep(5000);
 
         String st = "GE Healthcare: A KMS Lighthouse Success Story";
         WebElement element1 = driver.findElement(
