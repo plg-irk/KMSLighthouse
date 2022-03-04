@@ -1,6 +1,7 @@
 package com.kmslh;
 
 import com.github.javafaker.Faker;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -33,6 +34,11 @@ public class ScenarioFirstTest {
     }
 
     @Test
+    @DisplayName("Confirmation the submit")
+    @Description("•\tOpen the following page: https://www.kmslh.com/automation-test/\n" +
+            "•\tFill all the relevant information with random valid values\n" +
+            "•\tSubmit\n" +
+            "•\tConfirmation the submit was successful")
     void testFirst() throws InterruptedException {
 
         Faker faker = new Faker();

@@ -14,7 +14,7 @@ Scenario 2:
 •	Open the following page: https://www.kmslh.com/automation-test/
 •	on the redirected page, wait for the popup and click copy link button
 •	open the copied link.
-Verify GE Healthcare: A KMS Lighthouse Success Story video is opened.
+•	verify GE Healthcare: A KMS Lighthouse Success Story video is opened.
 
 
 SOLUTIONS:

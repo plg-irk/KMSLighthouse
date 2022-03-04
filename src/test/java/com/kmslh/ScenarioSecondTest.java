@@ -1,5 +1,6 @@
 package com.kmslh;
 
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -33,6 +34,11 @@ public class ScenarioSecondTest {
     }
 
     @Test
+    @DisplayName("Verify video is opened")
+    @Description("•\tOpen the following page: https://www.kmslh.com/automation-test/\n" +
+            "•\ton the redirected page, wait for the popup and click copy link button\n" +
+            "•\topen the copied link.\n" +
+            "•\tverify GE Healthcare: A KMS Lighthouse Success Story video is opened")
     void testSecond() {
 
 //      for stable popup loading

@@ -1,5 +1,6 @@
 package com.kmslh;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -31,27 +32,31 @@ public class MainPage {
     @FindBy(xpath = "//button[@class='leadinModal-close']")
     public WebElement elementClosePopupVideo;
 
-
+    @Step("Fill in the FirstName field")
     public MainPage fillFirstName(String firstName) {
         elementFirstName.sendKeys(firstName);
         return this;
     }
 
+    @Step("Fill in the LastName field")
     public MainPage fillLastName(String lastName) {
         elementLastName.sendKeys(lastName);
         return this;
     }
 
+    @Step("Fill in the eMail field")
     public MainPage fillEMail(String eMail) {
         elementEMail.sendKeys(eMail);
         return this;
     }
 
+    @Step("Fill in the Phone field")
     public MainPage fillPhone(String phone) {
         elementPhone.sendKeys(phone);
         return this;
     }
 
+    @Step("Fill in the Company field")
     public MainPage fillCompany(String company) {
         elementCompany.sendKeys(company);
         return this;
