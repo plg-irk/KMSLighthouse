@@ -15,7 +15,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScenarioSecond {
+public class ScenarioSecondTest {
     WebDriver driver;
     WebDriverWait webDriverWait;
 
