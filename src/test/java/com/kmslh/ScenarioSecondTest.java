@@ -35,6 +35,7 @@ public class ScenarioSecondTest {
     @Test
     void testSecond() {
 
+//      for stable popup loading
         Actions actions = new Actions(driver);
         actions.moveToElement(new MainPage(driver).elementFirstName)
                 .build()
