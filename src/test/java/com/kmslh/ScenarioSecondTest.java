@@ -48,11 +48,13 @@ public class ScenarioSecondTest {
         List<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
 
+        final String locatedElementSuccessStory = "//*[@id='container']/h1/yt-formatted-string";
+
         String st = "GE Healthcare: A KMS Lighthouse Success Story";
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//*[@id='container']/h1/yt-formatted-string")));
+                By.xpath(locatedElementSuccessStory)));
         WebElement elementSuccessStory = driver.findElement(
-                By.xpath("//*[@id='container']/h1/yt-formatted-string"));
+                By.xpath(locatedElementSuccessStory));
         Assertions.assertEquals(st, elementSuccessStory.getText());
     }
 
