@@ -1,72 +1,65 @@
 package com.kmslh;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class MainPage {
+    WebDriver driver;
 
-    public static void main(String[] args) throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(60));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(180));
+    @FindBy(xpath = "//input[contains(@id, 'firstname')]")
+    public WebElement elementFirstName;
 
-        driver.get("https://www.kmslh.com/automation-test/");
-//        Thread.sleep(5000);
+    @FindBy(xpath = "//input[contains(@id, 'lastname')]")
+    public WebElement elementLastName;
 
-        Actions actions = new Actions(driver);
-        actions.moveToElement(driver.findElement(
-                By.id("firstname-9de5ebd5-2ab3-48fe-bac8-bfc25cfc5814")))
-                .build()
-                .perform();
+    @FindBy(xpath = "//input[contains(@id, 'email')]")
+    public WebElement elementEMail;
 
-        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(
-                By.id("firstname-9de5ebd5-2ab3-48fe-bac8-bfc25cfc5814")));
-        driver.findElement(By.id("firstname-9de5ebd5-2ab3-48fe-bac8-bfc25cfc5814"));
+    @FindBy(xpath = "//input[contains(@id, 'phone')]")
+    public WebElement elementPhone;
 
-        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(
-                By.id("leadinModal-content-wrapper-2379091")));
-        driver.findElement(By.id("leadinModal-content-wrapper-2379091"));
+    @FindBy(xpath = "//input[contains(@id, 'company')]")
+    public WebElement elementCompany;
 
+    @FindBy(xpath = "//div[@class='actions']")
+    public WebElement elementSubmit;
 
-//        ((JavascriptExecutor) driver).executeScript(
-//                " var elem = document.getElementById('hs-eu-cookie-confirmation');\n" +
-//                        "  elem.remove();");
-//        driver.findElement(By.xpath("//*[@id=\"hs-eu-cookie-confirmation\"]"));
-//        driver.findElement(By.xpath("//*[@id=\"hs-eu-confirmation-button\"]"));
+    @FindBy(xpath = "//*[@id='leadinModal-content-wrapper-2379091']/div/div/span/div/p/a")
+    public WebElement elementLinkPopupVideo;
+
+    @FindBy(xpath = "//button[@class='leadinModal-close']")
+    public WebElement elementClosePopupVideo;
 
 
-//        WebElement element = driver.findElement(By.xpath(
-//                "//*[@id=\"leadinModal-content-wrapper-2379091\"]/div/div/span/div/p/a"));
-//        element.click();
+    public MainPage fillFirstName(String firstName) {
+        elementFirstName.sendKeys(firstName);
+        return this;
+    }
 
+    public MainPage fillLastName(String lastName) {
+        elementLastName.sendKeys(lastName);
+        return this;
+    }
 
-        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        System.out.println("tabs= " + tabs);
-//        driver.switchTo().window(tabs.get(1));
+    public MainPage fillEMail(String eMail) {
+        elementEMail.sendKeys(eMail);
+        return this;
+    }
 
-        WebElement element1 = driver.findElement(
-                By.xpath("//*[@id=\"container\"]/h1/yt-formatted-string"));
-        System.out.println(element1.getText());
+    public MainPage fillPhone(String phone) {
+        elementPhone.sendKeys(phone);
+        return this;
+    }
 
+    public MainPage fillCompany(String company) {
+        elementCompany.sendKeys(company);
+        return this;
+    }
 
-//        ((JavascriptExecutor) driver).executeScript("window.open()");
-//        ((JavascriptExecutor) driver).executeScript(
-//                " var elem = document.getElementById('top');\n" +
-//                        "  elem.remove();");
-
-        List<String> tabs1 = new ArrayList<>(driver.getWindowHandles());
-        System.out.println("tabs1= " + tabs1);
-
-//        Thread.sleep(5000);
-//        driver.quit();
+    public MainPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 }
+

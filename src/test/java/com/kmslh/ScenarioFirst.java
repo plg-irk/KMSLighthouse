@@ -14,6 +14,7 @@ import java.time.Duration;
 
 public class ScenarioFirst {
     WebDriver driver;
+    WebDriverWait webDriverWait;
 
     @BeforeAll
     static void setupClass() {
@@ -26,6 +27,7 @@ public class ScenarioFirst {
         options.addArguments("disable-popup-blocking");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(180));
+        webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(60));
         driver.get("https://www.kmslh.com/automation-test/");
 
     }
@@ -33,55 +35,38 @@ public class ScenarioFirst {
     @Test
     void testFirst() throws InterruptedException {
 
-        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(60));
-
         Faker faker = new Faker();
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
         String phone = faker.phoneNumber().phoneNumber();
         String company = faker.company().name();
 
-        WebElement elementFirstName = driver.findElement(
-                By.id("firstname-9de5ebd5-2ab3-48fe-bac8-bfc25cfc5814"));
-        elementFirstName.sendKeys(firstName);
-
-        WebElement elementLastName = driver.findElement(
-                By.id("lastname-9de5ebd5-2ab3-48fe-bac8-bfc25cfc5814"));
-        elementLastName.sendKeys(lastName);
-
-        WebElement elementEMail = driver.findElement(
-                By.id("email-9de5ebd5-2ab3-48fe-bac8-bfc25cfc5814"));
-        elementEMail.sendKeys(lastName + "@gb.com");
-
-        WebElement elementPhone = driver.findElement(
-                By.id("phone-9de5ebd5-2ab3-48fe-bac8-bfc25cfc5814"));
-        elementPhone.sendKeys(phone);
-
-        WebElement elementCompany = driver.findElement(
-                By.id("company-9de5ebd5-2ab3-48fe-bac8-bfc25cfc5814"));
-        elementCompany.sendKeys(company);
-
-        Thread.sleep(3000);
+        new MainPage(driver)
+                .fillFirstName(firstName)
+                .fillLastName(lastName)
+                .fillEMail(lastName + "@gb.com")
+                .fillPhone(phone)
+                .fillCompany(company);
 
         try {
             webDriverWait.until(ExpectedConditions.presenceOfElementLocated(
                     By.xpath("//button[@class='leadinModal-close']")));
-            driver.findElement(
-                    By.xpath("//button[@class='leadinModal-close']")).click();
+            new MainPage(driver).elementClosePopupVideo.click();
         } catch (TimeoutException ignored) {
 
         }
 
-        WebElement elementSubmit = driver.findElement(By.xpath("//div[@class='actions']"));
+        WebElement elementSubmit = new MainPage(driver).elementSubmit;
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
                 elementSubmit);
 
         Thread.sleep(500);
 
-        driver.findElement(By.xpath("//div[@class='actions']")).click();
+        new MainPage(driver).elementSubmit.click();
 
-        Thread.sleep(3000);
-
+        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//h1['Thank you for singing up!']")
+        ));
         WebElement elementText = driver.findElement(
                 By.xpath("//h1['Thank you for singing up!']"));
         String st = "Thank you for singing up!\n" +
